@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Garfunkel Vila — Software Engineer building web, mobile, and practical AI-powered applications.">
+  <title>Garfunkel Vila | Software Engineer</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #121a2d;
+      --surface-2: #18233a;
+      --text: #edf2fb;
+      --muted: #a7b3c8;
+      --accent: #78dcca;
+      --accent-2: #8ca8ff;
+      --line: rgba(220,235,255,.13);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .container { width: min(var(--max), calc(100% - 44px)); margin: auto; }
+    .site-header {
+      position: absolute; z-index: 5; inset: 0 0 auto; padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { color:#fff; font-size:1.05rem; font-weight:800; letter-spacing:.04em; text-decoration:none; }
+    .nav-links { display:flex; gap:24px; flex-wrap:wrap; }
+    .nav-links a { color:#dce5f5; text-decoration:none; font-size:.9rem; }
+    .nav-links a:hover, .text-link:hover { color:var(--accent); }
+    .hero {
+      min-height: 100vh; display:flex; align-items:center; position:relative; isolation:isolate;
+      padding: 130px 0 70px; overflow:hidden;
+      background:
+        linear-gradient(115deg, rgba(7,12,26,.94), rgba(11,20,42,.78) 52%, rgba(14,30,52,.82)),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2200&q=85") center/cover fixed;
+    }
+    .hero::before, .hero::after { content:""; position:absolute; z-index:-1; border-radius:50%; filter:blur(2px); }
+    .hero::before { width:520px; height:520px; right:-110px; top:12%; background:radial-gradient(circle,rgba(120,220,202,.18),transparent 68%); }
+    .hero::after { width:440px; height:440px; left:-180px; bottom:-15%; background:radial-gradient(circle,rgba(140,168,255,.16),transparent 70%); }
+    .eyebrow { color:var(--accent); text-transform:uppercase; letter-spacing:.18em; font-size:.76rem; font-weight:700; }
+    h1 { font-size:clamp(3rem, 8vw, 6.5rem); line-height:.98; letter-spacing:-.065em; margin:18px 0 20px; max-width:850px; }
+    .hero-quote { max-width:720px; font-size:clamp(1.2rem, 2.5vw, 1.75rem); color:#d6e0f0; margin:0 0 38px; }
+    .hero-quote span { color:var(--accent); }
+    .contact-grid { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:12px; max-width:980px; }
+    .contact-item { min-width:0; padding:16px; border:1px solid rgba(255,255,255,.17); background:rgba(12,20,38,.58); backdrop-filter:blur(12px); border-radius:12px; }
+    .contact-label { display:block; color:var(--muted); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px; }
+    .contact-item a, .contact-item strong { display:block; overflow-wrap:anywhere; font-size:.92rem; text-decoration:none; }
+    .contact-item a:hover { color:var(--accent); }
+    .linkedin-note { color:var(--muted); font-size:.76rem; margin-top:4px; }
+    .scroll-cue { display:inline-flex; align-items:center; gap:10px; margin-top:34px; color:#c4d0e3; text-decoration:none; font-size:.85rem; }
+    .scroll-cue::before { content:""; width:34px; height:1px; background:var(--accent); }
+    section { padding:100px 0; }
+    .section-kicker { color:var(--accent); text-transform:uppercase; letter-spacing:.16em; font-size:.74rem; font-weight:700; }
+    h2 { font-size:clamp(2rem,4vw,3.2rem); line-height:1.1; letter-spacing:-.045em; margin:10px 0 28px; }
+    h3 { margin:0 0 8px; font-size:1.2rem; }
+    p { color:var(--muted); margin:0 0 16px; }
+    .intro { max-width:800px; font-size:1.12rem; }
+    .about-layout { display:grid; grid-template-columns:1.2fr .8fr; gap:56px; align-items:start; }
+    .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .stat { padding:22px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+    .stat strong { display:block; color:var(--accent); font-size:1.65rem; }
+    .stat span { color:var(--muted); font-size:.85rem; }
+    .alt { background:#0e1628; }
+    .timeline { border-left:1px solid var(--line); margin-left:8px; padding-left:28px; }
+    .timeline-item { position:relative; padding:0 0 36px; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .timeline-item::before { content:""; position:absolute; width:11px; height:11px; border-radius:50%; background:var(--accent); left:-34px; top:8px; box-shadow:0 0 0 5px rgba(120,220,202,.12); }
+    .meta { color:var(--accent-2); font-size:.85rem; margin-bottom:8px; }
+    .timeline-item ul { color:var(--muted); padding-left:20px; margin:12px 0 0; }
+    .project-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .project-card { padding:26px; background:var(--surface); border:1px solid var(--line); border-radius:14px; transition:transform .2s,border-color .2s; }
+    .project-card:hover { transform:translateY(-4px); border-color:rgba(120,220,202,.55); }
+    .project-type { color:var(--accent); font-size:.73rem; text-transform:uppercase; letter-spacing:.12em; margin-bottom:12px; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .tag { padding:5px 10px; border:1px solid var(--line); border-radius:99px; color:#cbd6e8; font-size:.75rem; }
+    .skill-groups { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .skill-group { padding:22px; border-radius:12px; background:var(--surface); border:1px solid var(--line); }
+    .skill-group p { margin:0; }
+    .education { padding:26px; background:var(--surface); border:1px solid var(--line); border-radius:14px; max-width:700px; }
+    .contact-panel { display:flex; justify-content:space-between; align-items:center; gap:28px; padding:34px; background:linear-gradient(120deg,#172a3c,#17213a); border:1px solid var(--line); border-radius:16px; }
+    .button { display:inline-block; flex-shrink:0; padding:13px 20px; color:#07121c; background:var(--accent); border-radius:8px; text-decoration:none; font-weight:800; }
+    footer { padding:28px 0; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    @media (max-width:800px) {
+      .contact-grid { grid-template-columns:repeat(2,1fr); }
+      .about-layout { grid-template-columns:1fr; gap:28px; }
+      .skill-groups { grid-template-columns:1fr 1fr; }
+      .nav { align-items:flex-start; flex-direction:column; }
+      .site-header { padding:18px 0; }
+      .hero { background-attachment:scroll; }
+    }
+    @media (max-width:560px) {
+      .container { width:min(100% - 32px,var(--max)); }
+      .nav-links { gap:14px; }
+      .nav-links a { font-size:.82rem; }
+      .contact-grid, .project-grid, .skill-groups { grid-template-columns:1fr; }
+      .hero { min-height:auto; padding:160px 0 70px; }
+      section { padding:72px 0; }
+      .contact-panel { align-items:flex-start; flex-direction:column; padding:25px; }
+      .stat-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { transition:none !important; }
+      .hero { background-attachment:scroll; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#home">GARFUNKEL VILA</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="eyebrow">Software Engineer · Full-stack Web & Mobile</div>
+        <h1>Garfunkel<br>Vila<span style="color:var(--accent)">.</span></h1>
+        <p class="hero-quote">“Collecting technologies like hobbies, <span>connecting them like it’s a plan.</span>”</p>
+
+        <!-- These four contact details are intentionally visible on the first screen. -->
+        <div class="contact-grid" aria-label="Contact information">
+          <div class="contact-item">
+            <span class="contact-label">Email</span>
+            <a href="mailto:garfunkel.vila@outlook.com">garfunkel.vila@outlook.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Contact</span>
+            <a href="tel:+639063248944">+63 906 324 8944</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Address</span>
+            <strong>San Mateo, Rizal, Philippines</strong>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">LinkedIn</span>
+            <!-- Replace the placeholder below with your public LinkedIn profile URL. -->
+            <a href="#contact">Add LinkedIn profile URL</a>
+            <span class="linkedin-note">Profile link to be added</span>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#about">Scroll to explore</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-layout">
+        <div>
+          <div class="section-kicker">01 / About</div>
+          <h2>Building useful things<br>with thoughtful engineering.</h2>
+          <p class="intro">Versatile full-stack web developer with 5+ years of experience crafting responsive web and mobile applications. Experienced across HTML, CSS, JavaScript, Angular, Ionic, and Laravel, with a focus on REST API integration, cross-browser compatibility, maintainability, and AI-assisted development.</p>
+          <p>Work has spanned gaming, fintech, banking, insurance, and public-service environments. I enjoy connecting front-end experiences, backend services, and the infrastructure that makes applications dependable.</p>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><strong>5+ years</strong><span>Software development</span></div>
+          <div class="stat"><strong>Web + Mobile</strong><span>Application development</span></div>
+          <div class="stat"><strong>Full-stack</strong><span>Frontend, APIs, backend</span></div>
+          <div class="stat"><strong>AI-assisted</strong><span>Development and local LLM exploration</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt" id="experience">
+      <div class="container">
+        <div class="section-kicker">02 / Career</div>
+        <h2>Experience</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="meta">Sep 2023 – Dec 2025 · 28 months</div>
+            <h3>Technology Architect Associate / Advanced App Engineering Analyst</h3>
+            <p><strong>Accenture, Inc. (Philippines)</strong></p>
+            <p>Delivered enterprise banking and insurance applications, focusing on maintainability, code quality, security compliance, system stability, and process improvement.</p>
+            <ul>
+              <li>Designed secure, scalable banking solutions aligned with compliance and performance standards.</li>
+              <li>Promoted OOP principles and design patterns while mentoring and guiding cross-functional teammates.</li>
+              <li>Used CI/CD pipelines and automated tests to improve delivery and consistency.</li>
+            </ul>
+          </article>
+          <article class="timeline-item">
+            <div class="meta">Feb 2022 – Feb 2023 · 13 months</div>
+            <h3>Analyst Programmer / Support Developer / Frontend Developer</h3>
+            <p><strong>Collabera Philippines</strong></p>
+            <p>Contributed to fintech, middleware, and mobile banking initiatives.</p>
+            <ul>
+              <li>Designed and optimized middleware components in Java, PHP, and Node.js.</li>
+              <li>Built digital-wallet interfaces and integrated REST APIs with PHP/Laravel.</li>
+              <li>Maintained a hybrid Android banking app and improved stability across devices.</li>
+            </ul>
+          </article>
+          <article class="timeline-item">
+            <div class="meta">Dec 2018 – Aug 2020 · 21 months</div>
+            <h3>Web Developer</h3>
+            <p><strong>Cloversoft</strong></p>
+            <p>Maintained and enhanced the company’s online presence, developed proof-of-concept prototypes, and worked across front-end design and backend integration.</p>
+            <ul>
+              <li>Built responsive interfaces from design mockups.</li>
+              <li>Integrated REST APIs and Laravel backend services.</li>
+              <li>Worked on cross-browser fixes, architecture discussions, and code reviews.</li>
+            </ul>
+          </article>
+          <article class="timeline-item">
+            <div class="meta">Nov 2020 – May 2021 · Freelance</div>
+            <h3>Internal Enterprise Tool · eSixty Corporation</h3>
+            <p>Developed Vue.js and Nuxt interfaces, integrated authentication and business-logic APIs, and applied responsive design and software design patterns.</p>
+          </article>
+          <article class="timeline-item">
+            <div class="meta">Aug 2021 – Oct 2021 · Freelance</div>
+            <h3>Local E-commerce Website · Think Sumo Creative Media Inc.</h3>
+            <p>Enhanced a Laravel and MySQL application, worked on MVC architecture and API development, and improved responsive UI behavior.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-kicker">03 / Selected work</div>
+        <h2>Projects & explorations</h2>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-type">Homelab · Infrastructure</div>
+            <h3>Infrastructure & DevOps Homelab</h3>
+            <p>Self-managed Linux services used to explore microservice deployment, system administration, reverse proxies, API boundaries, and network security.</p>
+            <div class="tags"><span class="tag">Linux</span><span class="tag">Nginx</span><span class="tag">GitLab</span><span class="tag">Ollama</span><span class="tag">Containers</span></div>
+          </article>
+          <article class="project-card">
+            <div class="project-type">Homelab · Networking</div>
+            <h3>Secure Remote Network Access</h3>
+            <p>Designed a self-managed VPN environment with client-side encryption keys, firewall rules, port forwarding, DNS, DHCP, and name-based virtual hosting.</p>
+            <div class="tags"><span class="tag">VPN</span><span class="tag">Networking</span><span class="tag">DNS</span><span class="tag">Firewall</span></div>
+          </article>
+          <article class="project-card">
+            <div class="project-type">Mobile · Network tools</div>
+            <h3>Personal Network Monitoring Dashboard</h3>
+            <p>Built a mobile dashboard for local network monitoring and control, including access-list control, remote power management, and firmware-update workflows.</p>
+            <div class="tags"><span class="tag">Angular</span><span class="tag">Ionic</span><span class="tag">Capacitor</span></div>
+          </article>
+          <article class="project-card">
+            <div class="project-type">Mobile · Network safety</div>
+            <h3>Custom Kid Control</h3>
+            <p>Developed a mobile platform for network monitoring and firewall automation, including time-based controls for registered devices and safer browsing configurations.</p>
+            <div class="tags"><span class="tag">Angular Signals</span><span class="tag">Ionic</span><span class="tag">Capacitor</span></div>
+          </article>
+          <article class="project-card">
+            <div class="project-type">Mobile · Personal productivity</div>
+            <h3>Custom Grocery List</h3>
+            <p>Created a hybrid grocery application with reusable components, layered entities and DTOs, local data handling, barcode scanning, and local-LLM-powered suggestions.</p>
+            <div class="tags"><span class="tag">TypeScript</span><span class="tag">Angular</span><span class="tag">SQLite</span><span class="tag">Ollama API</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt" id="skills">
+      <div class="container">
+        <div class="section-kicker">04 / Toolkit</div>
+        <h2>Technologies & skills</h2>
+        <div class="skill-groups">
+          <div class="skill-group"><h3>Frontend & mobile</h3><p>HTML5, CSS3/SCSS, JavaScript, TypeScript, Angular, RxJS, Ionic, Capacitor, Vue.js, Nuxt, Bootstrap, responsive UI</p></div>
+          <div class="skill-group"><h3>Backend & data</h3><p>PHP, Laravel, Java, Node.js, REST APIs, SQL, MySQL, SQLite, PostgreSQL, authentication</p></div>
+          <div class="skill-group"><h3>Engineering practices</h3><p>OOP, design patterns, data structures, code review, system architecture, technical documentation, Agile, CI/CD</p></div>
+          <div class="skill-group"><h3>AI & development tools</h3><p>GenAI, AI-assisted development, prompt engineering, Ollama, Python, Postman, Git, GitLab, Jira</p></div>
+          <div class="skill-group"><h3>Infrastructure</h3><p>Linux, Nginx, VPN, DNS, DHCP, firewall configuration, containers, Jenkins, Azure DevOps</p></div>
+          <div class="skill-group"><h3>Additional experience</h3><p>Adobe Experience Manager, Alipay MiniProgram, jQuery, AJAX/XHR, VBA, Photoshop, cross-browser compatibility</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-kicker">05 / Education</div>
+        <h2>Education</h2>
+        <div class="education">
+          <div class="meta">July 2010 – March 2018</div>
+          <h3>Bachelor of Science in Information Technology</h3>
+          <p>University of Perpetual Help System – Jonelta</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="alt" id="contact">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <div class="section-kicker">06 / Get in touch</div>
+            <h2 style="margin-bottom:10px">Have a project in mind?</h2>
+            <p style="margin:0">Let’s talk about building something useful.</p>
+          </div>
+          <a class="button" href="mailto:garfunkel.vila@outlook.com">Email me</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Garfunkel Vila</span>
+      <span>Designed with curiosity. Built with purpose.</span>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
