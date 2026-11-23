@@ -412,8 +412,28 @@
         outline-offset: 4px;
         border-radius: 3px;
       }
-      .project-card li[hidden] {
-        display: none;
+      .project-card li.project-detail {
+        max-height: 0;
+        margin-bottom: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition:
+          max-height 380ms ease,
+          opacity 260ms ease,
+          margin-bottom 380ms ease;
+        will-change: max-height, opacity;
+      }
+      .project-card li.project-detail.is-visible {
+        opacity: 1;
+        margin-bottom: 8px;
+      }
+      .project-card li.project-detail:last-child.is-visible {
+        margin-bottom: 0;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .project-card li.project-detail {
+          transition: none;
+        }
       }
       .project-type {
         color: var(--accent);
@@ -612,7 +632,7 @@
             <a
               class="hero-action primary"
               href="Garfunkel%20Vila%20-%20Resume.pdf"
-              download="Garfunkel Vila Resume.pdf"
+              download="Garfunkel Vila - Resume.pdf"
             >
               <span aria-hidden="true">↓</span>
               Download Resume
@@ -1103,13 +1123,14 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // Hide project details initially and let visitors expand each card.
+      // Hide project details initially and animate each card independently.
       document.querySelectorAll(".project-card ul").forEach((list) => {
         const items = Array.from(list.querySelectorAll("li"));
         if (items.length === 0) return;
 
         items.forEach((item) => {
-          item.hidden = true;
+          item.classList.add("project-detail");
+          item.setAttribute("aria-hidden", "true");
         });
 
         const toggle = document.createElement("button");
@@ -1120,12 +1141,40 @@
 
         toggle.addEventListener("click", () => {
           const expanded = toggle.getAttribute("aria-expanded") === "true";
-          items.forEach((item) => {
-            item.hidden = expanded;
-          });
+
+          if (expanded) {
+            // Freeze current heights before animating back to zero.
+            items.forEach((item) => {
+              item.style.maxHeight = `${item.scrollHeight}px`;
+            });
+            requestAnimationFrame(() => {
+              items.forEach((item) => {
+                item.classList.remove("is-visible");
+                item.style.maxHeight = "0px";
+                item.setAttribute("aria-hidden", "true");
+              });
+            });
+          } else {
+            items.forEach((item) => {
+              item.classList.add("is-visible");
+              item.style.maxHeight = `${item.scrollHeight}px`;
+              item.setAttribute("aria-hidden", "false");
+            });
+          }
+
           list.classList.toggle("is-expanded", !expanded);
           toggle.setAttribute("aria-expanded", String(!expanded));
           toggle.textContent = expanded ? "See more" : "See less";
+        });
+
+        // Once an item finishes expanding, let its height adapt to text wrapping.
+        items.forEach((item) => {
+          item.addEventListener("transitionend", (event) => {
+            if (event.propertyName !== "max-height") return;
+            if (item.classList.contains("is-visible")) {
+              item.style.maxHeight = "none";
+            }
+          });
         });
 
         list.insertAdjacentElement("afterend", toggle);
