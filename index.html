@@ -189,6 +189,52 @@
         font-size: 0.76rem;
         margin-top: 4px;
       }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+      .hero-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 46px;
+        padding: 11px 17px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        background: rgba(12, 20, 38, 0.58);
+        color: #edf2fb;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        backdrop-filter: blur(12px);
+        transition:
+          transform 0.2s,
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .hero-action:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent);
+        background: rgba(24, 35, 58, 0.9);
+      }
+      .hero-action.primary {
+        color: #07121c;
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+      .hero-action.primary:hover {
+        background: #9ae9da;
+        border-color: #9ae9da;
+      }
+      .hero-action .action-note {
+        color: inherit;
+        opacity: 0.72;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
       .scroll-cue {
         display: inline-flex;
         align-items: center;
@@ -311,6 +357,63 @@
       .project-card:hover {
         transform: translateY(-4px);
         border-color: rgba(120, 220, 202, 0.55);
+      }
+      .project-card .meta {
+        margin: -2px 0 12px;
+      }
+      .project-card ul {
+        color: var(--muted);
+        padding-left: 20px;
+        margin: 12px 0 0;
+      }
+      .project-card li {
+        margin-bottom: 8px;
+      }
+      .project-card li:last-child {
+        margin-bottom: 0;
+      }
+      .project-card ul {
+        margin-top: 0;
+      }
+      .project-card ul.is-expanded {
+        margin-top: 12px;
+      }
+      .project-card .project-details-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        margin-top: 14px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--accent);
+        font: inherit;
+        font-size: 0.88rem;
+        font-weight: 700;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .project-card .project-details-toggle::before,
+      .project-card .project-details-toggle::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+      .project-card .project-details-toggle:hover {
+        color: #a5f1e3;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .project-card .project-details-toggle:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        border-radius: 3px;
+      }
+      .project-card li[hidden] {
+        display: none;
       }
       .project-type {
         color: var(--accent);
@@ -505,6 +608,32 @@
               <span class="linkedin-note">Connect on LinkedIn</span>
             </div>
           </div>
+          <div class="hero-actions" aria-label="Resume and developer profiles">
+            <a
+              class="hero-action primary"
+              href="Garfunkel%20Vila%20-%20Resume.pdf"
+              download="Garfunkel Vila Resume.pdf"
+            >
+              <span aria-hidden="true">↓</span>
+              Download Resume
+            </a>
+            <a
+              class="hero-action"
+              href="https://github.com/vila-garfunkel"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub <span class="action-note">Active ↗</span>
+            </a>
+            <a
+              class="hero-action"
+              href="https://github.com/garfunkelvila"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub <span class="action-note">Previous ↗</span>
+            </a>
+          </div>
           <a class="scroll-cue" href="#about">Scroll to explore</a>
         </div>
       </section>
@@ -645,75 +774,239 @@
 
       <section id="projects">
         <div class="container">
-          <div class="section-kicker">03 / Selected work</div>
+          <div class="section-kicker">03 / Independent work</div>
           <h2>Projects & explorations</h2>
+          <p class="intro" style="margin-bottom: 30px">
+            Selected homelab, mobile, and desktop projects exploring application
+            engineering, network infrastructure, and practical AI integration.
+          </p>
           <div class="project-grid">
             <article class="project-card">
-              <div class="project-type">Homelab · Infrastructure</div>
+              <div class="project-type">Homelab · Infrastructure & DevOps</div>
               <h3>Infrastructure & DevOps Homelab</h3>
+              <div class="meta">
+                Jan 2026 · Architecture & exploration phase
+              </div>
               <p>
-                Self-managed Linux services used to explore microservice
+                Built a self-managed Linux environment to explore service
                 deployment, system administration, reverse proxies, API
                 boundaries, and network security.
               </p>
+              <ul>
+                <li>
+                  Installed and configured foundational services including
+                  <strong>Nginx</strong>, <strong>GitLab</strong>,
+                  <strong>Ollama</strong>, and open-source ChatUI using raw
+                  configurations and containerization.
+                </li>
+                <li>
+                  Applied reverse-proxy and gateway patterns to define API
+                  boundaries and manage traffic between applications.
+                </li>
+                <li>
+                  Mapped system dependencies and focused on securing local
+                  networking resources from the foundation up.
+                </li>
+              </ul>
               <div class="tags">
-                <span class="tag">Linux</span><span class="tag">Nginx</span
-                ><span class="tag">GitLab</span><span class="tag">Ollama</span
-                ><span class="tag">Containers</span>
+                <span class="tag">Linux</span><span class="tag">Nginx</span>
+                <span class="tag">GitLab</span><span class="tag">Ollama</span>
+                <span class="tag">Containers</span
+                ><span class="tag">Networking</span>
               </div>
             </article>
+
             <article class="project-card">
               <div class="project-type">Homelab · Networking</div>
-              <h3>Secure Remote Network Access</h3>
+              <h3>VPN Implementation for Secure Remote Network Access</h3>
+              <div class="meta">Feb 2026 – Mar 2026</div>
               <p>
                 Designed a self-managed VPN environment with client-side
                 encryption keys, firewall rules, port forwarding, DNS, DHCP, and
                 name-based virtual hosting.
               </p>
+              <ul>
+                <li>
+                  Established self-managed VPN servers for cross-location
+                  accessibility using client-side encryption keys.
+                </li>
+                <li>
+                  Implemented custom firewall settings and port forwarding to
+                  secure the infrastructure.
+                </li>
+                <li>
+                  Configured DNS and DHCP for URL-based access through
+                  <strong>Nginx</strong> name-based virtual hosting.
+                </li>
+                <li>
+                  Applied LAN and WAN networking concepts alongside firewall
+                  management principles.
+                </li>
+              </ul>
               <div class="tags">
-                <span class="tag">VPN</span><span class="tag">Networking</span
-                ><span class="tag">DNS</span><span class="tag">Firewall</span>
+                <span class="tag">VPN</span><span class="tag">Networking</span>
+                <span class="tag">Firewall</span><span class="tag">DNS</span>
+                <span class="tag">DHCP</span
+                ><span class="tag">Network Security</span>
               </div>
             </article>
+
             <article class="project-card">
-              <div class="project-type">Mobile · Network tools</div>
-              <h3>Personal Network Monitoring Dashboard</h3>
+              <div class="project-type">Homelab · Mobile platform</div>
+              <h3>Personal Network Monitoring & Control Dashboard</h3>
+              <div class="meta">Feb 2026 – Present</div>
               <p>
                 Built a mobile dashboard for local network monitoring and
                 control, including access-list control, remote power management,
                 and firmware-update workflows.
               </p>
+              <ul>
+                <li>
+                  Implemented automation scripts for access-list control, remote
+                  power management, and firmware updating.
+                </li>
+                <li>
+                  Integrated network configuration capabilities covering DNS,
+                  DHCP, VPN, LAN/WAN concepts, and firewall management.
+                </li>
+                <li>
+                  Reviewed and refined AI-generated code using
+                  <strong>Zed Editor</strong> to improve security and
+                  maintainability.
+                </li>
+              </ul>
               <div class="tags">
-                <span class="tag">Angular</span><span class="tag">Ionic</span
-                ><span class="tag">Capacitor</span>
+                <span class="tag">Angular</span
+                ><span class="tag">Angular Signals</span>
+                <span class="tag">Ionic</span><span class="tag">Capacitor</span>
+                <span class="tag">Scripting</span
+                ><span class="tag">Network Configuration</span>
               </div>
             </article>
+
             <article class="project-card">
-              <div class="project-type">Mobile · Network safety</div>
-              <h3>Custom Kid Control</h3>
+              <div class="project-type">
+                Homelab · Mobile platform · Network safety
+              </div>
+              <h3>Custom Kid Internet Control</h3>
+              <div class="meta">Mar 2026</div>
               <p>
                 Developed a mobile platform for network monitoring and firewall
-                automation, including time-based controls for registered devices
-                and safer browsing configurations.
+                automation using <strong>Angular</strong>,
+                <strong>Capacitor</strong>, and
+                <strong>Ionic Framework</strong>.
               </p>
+              <ul>
+                <li>
+                  Configured firewall rules to enable time-based controls for
+                  registered child devices.
+                </li>
+                <li>
+                  Managed network monitoring configurations to support safer
+                  browsing environments.
+                </li>
+                <li>
+                  Applied Angular Signals for reactive state management within
+                  the application.
+                </li>
+              </ul>
               <div class="tags">
-                <span class="tag">Angular Signals</span
-                ><span class="tag">Ionic</span
-                ><span class="tag">Capacitor</span>
+                <span class="tag">Angular</span
+                ><span class="tag">Angular Signals</span>
+                <span class="tag">Ionic</span><span class="tag">Capacitor</span>
+                <span class="tag">Firewall Management</span
+                ><span class="tag">Device Management</span>
               </div>
             </article>
+
             <article class="project-card">
-              <div class="project-type">Mobile · Personal productivity</div>
+              <div class="project-type">
+                Homelab · Mobile platform · Productivity
+              </div>
               <h3>Custom Grocery List</h3>
+              <div class="meta">Jun 2026 – Present</div>
               <p>
                 Created a hybrid grocery application with reusable components,
                 layered entities and DTOs, local data handling, barcode
                 scanning, and local-LLM-powered suggestions.
               </p>
+              <ul>
+                <li>
+                  Developed reusable components and utilities using
+                  <strong>Angular Signals</strong> for consistent state
+                  management and data flow.
+                </li>
+                <li>
+                  Designed entity classes and DTOs for consistent data handling
+                  across application layers, backed by <strong>SQLite</strong>.
+                </li>
+                <li>
+                  Integrated local LLMs through the <strong>Ollama API</strong>
+                  for suggestion generation and content enrichment.
+                </li>
+                <li>
+                  Reviewed and refined AI-generated code for security,
+                  maintainability, and engineering best practices.
+                </li>
+                <li>
+                  Integrated Moment.js and html5-qrcode for date formatting and
+                  barcode scanning.
+                </li>
+              </ul>
               <div class="tags">
-                <span class="tag">TypeScript</span
-                ><span class="tag">Angular</span><span class="tag">SQLite</span
+                <span class="tag">Angular</span
+                ><span class="tag">TypeScript</span>
+                <span class="tag">Ionic</span><span class="tag">Capacitor</span>
+                <span class="tag">SQLite</span
                 ><span class="tag">Ollama API</span>
+                <span class="tag">Barcode Scanning</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-type">Desktop · AI productivity platform</div>
+              <h3>Workflow Catalyst</h3>
+              <div class="meta">Nov 2026 – Present · WFH desktop platform</div>
+              <p>
+                Engineered a single-page <strong>Angular</strong> application
+                evolving into a multi-feature productivity platform with
+                advanced AI capabilities.
+              </p>
+              <ul>
+                <li>
+                  Integrated <strong>Ollama</strong> local LLMs for text
+                  processing, description cleaning, and content generation.
+                </li>
+                <li>
+                  Implemented an <strong>MCP</strong> (Model Context Protocol)
+                  tool-calling system using
+                  <strong>@modelcontextprotocol/client</strong> for intelligent
+                  function execution.
+                </li>
+                <li>
+                  Built queue-based batch processing with start, pause, and stop
+                  controls for efficient AI task management.
+                </li>
+                <li>
+                  Used <strong>Angular Signals</strong> and
+                  <strong>computed()</strong> alongside
+                  <strong>RxJS Observables</strong> for reactive state
+                  management.
+                </li>
+                <li>
+                  Optimized bundle sizes through lazy loading with the
+                  <strong>loadChildren</strong> pattern and modular
+                  architecture.
+                </li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Angular</span
+                ><span class="tag">TypeScript</span>
+                <span class="tag">RxJS</span><span class="tag">Ollama</span>
+                <span class="tag">MCP</span
+                ><span class="tag">Angular Signals</span>
+                <span class="tag">Batch Processing</span
+                ><span class="tag">Lazy Loading</span>
               </div>
             </article>
           </div>
@@ -750,7 +1043,7 @@
               <h3>AI & development tools</h3>
               <p>
                 GenAI, AI-assisted development, prompt engineering, Ollama,
-                Python, Postman, Git, GitLab, Jira
+                Python, Postman, Git, GitLab, Jira, MCP
               </p>
             </div>
             <div class="skill-group">
@@ -809,6 +1102,34 @@
     </footer>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Hide project details initially and let visitors expand each card.
+      document.querySelectorAll(".project-card ul").forEach((list) => {
+        const items = Array.from(list.querySelectorAll("li"));
+        if (items.length === 0) return;
+
+        items.forEach((item) => {
+          item.hidden = true;
+        });
+
+        const toggle = document.createElement("button");
+        toggle.type = "button";
+        toggle.className = "project-details-toggle";
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.textContent = "See more";
+
+        toggle.addEventListener("click", () => {
+          const expanded = toggle.getAttribute("aria-expanded") === "true";
+          items.forEach((item) => {
+            item.hidden = expanded;
+          });
+          list.classList.toggle("is-expanded", !expanded);
+          toggle.setAttribute("aria-expanded", String(!expanded));
+          toggle.textContent = expanded ? "See more" : "See less";
+        });
+
+        list.insertAdjacentElement("afterend", toggle);
+      });
     </script>
   </body>
 </html>
