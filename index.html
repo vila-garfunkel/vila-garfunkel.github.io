@@ -361,6 +361,25 @@
       .project-card .meta {
         margin: -2px 0 12px;
       }
+      .project-card .project-repo {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin: -2px 0 10px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        text-decoration: none;
+      }
+      .project-card .project-repo:hover {
+        color: #a5f1e3;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .project-card .project-repo:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 3px;
+      }
       .project-card ul {
         color: var(--muted);
         padding-left: 20px;
@@ -1005,47 +1024,52 @@
             <article class="project-card">
               <div class="project-type">Desktop · AI productivity platform</div>
               <h3>Workflow Catalyst</h3>
+              <a
+                class="project-repo"
+                href="https://github.com/vila-garfunkel/FE-Chat-Diety"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Workflow Catalyst on GitHub (opens in a new tab)"
+              >
+                View on GitHub ↗
+              </a>
               <div class="meta">Nov 2026 – Present · WFH desktop platform</div>
               <p>
-                Engineered a single-page <strong>Angular</strong> application
-                evolving into a multi-feature productivity platform with
-                advanced AI capabilities.
+                A <strong>vibe-coded, AI-assisted</strong> desktop productivity
+                platform built through prompt-driven development, rapid
+                prototyping, and iterative refinement. It brings local AI and
+                tool-connected workflows into one place.
               </p>
               <ul>
                 <li>
-                  Integrated <strong>Ollama</strong> local LLMs for text
-                  processing, description cleaning, and content generation.
+                  Built the interface with <strong>React</strong> and
+                  <strong>TypeScript</strong>, shaping features through
+                  conversational prompting and hands-on iteration.
                 </li>
                 <li>
-                  Implemented an <strong>MCP</strong> (Model Context Protocol)
-                  tool-calling system using
-                  <strong>@modelcontextprotocol/client</strong> for intelligent
-                  function execution.
+                  Connected <strong>Ollama</strong> for local LLM-powered text
+                  processing, description cleanup, and content generation.
                 </li>
                 <li>
-                  Built queue-based batch processing with start, pause, and stop
-                  controls for efficient AI task management.
+                  Integrated <strong>MCP</strong> (Model Context Protocol) with
+                  <strong>@modelcontextprotocol/client</strong> to let AI
+                  workflows discover and invoke tools.
                 </li>
                 <li>
-                  Used <strong>Angular Signals</strong> and
-                  <strong>computed()</strong> alongside
-                  <strong>RxJS Observables</strong> for reactive state
-                  management.
+                  Created queue-based batch workflows with start, pause, and
+                  stop controls to manage multiple AI tasks.
                 </li>
                 <li>
-                  Optimized bundle sizes through lazy loading with the
-                  <strong>loadChildren</strong> pattern and modular
-                  architecture.
+                  Refined the app through iterative prompting, testing, and
+                  targeted code adjustments, turning ideas into usable features.
                 </li>
               </ul>
               <div class="tags">
-                <span class="tag">Angular</span
-                ><span class="tag">TypeScript</span>
-                <span class="tag">RxJS</span><span class="tag">Ollama</span>
-                <span class="tag">MCP</span
-                ><span class="tag">Angular Signals</span>
-                <span class="tag">Batch Processing</span
-                ><span class="tag">Lazy Loading</span>
+                <span class="tag">React</span><span class="tag">TypeScript</span>
+                <span class="tag">Ollama</span><span class="tag">MCP</span>
+                <span class="tag">AI-assisted Development</span>
+                <span class="tag">Prompt Engineering</span>
+                <span class="tag">Tool Calling</span><span class="tag">Batch Processing</span>
               </div>
             </article>
           </div>
